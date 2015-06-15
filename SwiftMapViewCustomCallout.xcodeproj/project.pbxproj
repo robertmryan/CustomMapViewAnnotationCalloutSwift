@@ -13,6 +13,11 @@
 		830D05911B2E992C00EF8033 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830D05901B2E992C00EF8033 /* Images.xcassets */; };
 		830D05941B2E992C00EF8033 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830D05921B2E992C00EF8033 /* LaunchScreen.xib */; };
 		830D05A01B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */; };
+		830D05AA1B2E995700EF8033 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830D05A91B2E995700EF8033 /* MapKit.framework */; };
+		830D05AF1B2E99C400EF8033 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AB1B2E99C400EF8033 /* BubbleView.swift */; };
+		830D05B01B2E99C400EF8033 /* CalloutAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AC1B2E99C400EF8033 /* CalloutAnnotation.swift */; };
+		830D05B11B2E99C400EF8033 /* CalloutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AD1B2E99C400EF8033 /* CalloutAnnotationView.swift */; };
+		830D05B21B2E99C400EF8033 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AE1B2E99C400EF8033 /* CustomAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,12 @@
 		830D05991B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftMapViewCustomCalloutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		830D059E1B2E992E00EF8033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMapViewCustomCalloutTests.swift; sourceTree = "<group>"; };
+		830D05A91B2E995700EF8033 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		830D05AB1B2E99C400EF8033 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
+		830D05AC1B2E99C400EF8033 /* CalloutAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutAnnotation.swift; sourceTree = "<group>"; };
+		830D05AD1B2E99C400EF8033 /* CalloutAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutAnnotationView.swift; sourceTree = "<group>"; };
+		830D05AE1B2E99C400EF8033 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		830D05B31B2E9E2C00EF8033 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830D05AA1B2E995700EF8033 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +71,7 @@
 		830D057B1B2E992200EF8033 = {
 			isa = PBXGroup;
 			children = (
+				830D05B31B2E9E2C00EF8033 /* README.md */,
 				830D05861B2E992400EF8033 /* SwiftMapViewCustomCallout */,
 				830D059C1B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests */,
 				830D05851B2E992300EF8033 /* Products */,
@@ -79,6 +92,10 @@
 			children = (
 				830D05891B2E992700EF8033 /* AppDelegate.swift */,
 				830D058B1B2E992800EF8033 /* ViewController.swift */,
+				830D05AE1B2E99C400EF8033 /* CustomAnnotation.swift */,
+				830D05AC1B2E99C400EF8033 /* CalloutAnnotation.swift */,
+				830D05AD1B2E99C400EF8033 /* CalloutAnnotationView.swift */,
+				830D05AB1B2E99C400EF8033 /* BubbleView.swift */,
 				830D058D1B2E992A00EF8033 /* Main.storyboard */,
 				830D05901B2E992C00EF8033 /* Images.xcassets */,
 				830D05921B2E992C00EF8033 /* LaunchScreen.xib */,
@@ -90,6 +107,7 @@
 		830D05871B2E992600EF8033 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				830D05A91B2E995700EF8033 /* MapKit.framework */,
 				830D05881B2E992600EF8033 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -161,6 +179,11 @@
 				TargetAttributes = {
 					830D05831B2E992300EF8033 = {
 						CreatedOnToolsVersion = 6.3.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					830D05981B2E992E00EF8033 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -212,8 +235,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830D05AF1B2E99C400EF8033 /* BubbleView.swift in Sources */,
+				830D05B01B2E99C400EF8033 /* CalloutAnnotation.swift in Sources */,
 				830D058C1B2E992800EF8033 /* ViewController.swift in Sources */,
+				830D05B11B2E99C400EF8033 /* CalloutAnnotationView.swift in Sources */,
 				830D058A1B2E992700EF8033 /* AppDelegate.swift in Sources */,
+				830D05B21B2E99C400EF8033 /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
