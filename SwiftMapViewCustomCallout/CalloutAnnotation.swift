@@ -34,7 +34,7 @@ class CalloutAnnotation : MKPointAnnotation {
     
     /// Override `title` so that it simply the title of the annotation for which this serves as callout
     
-    override var title: String! {
+    override var title: String? {
         get { return underlyingAnnotation.title }
         set { underlyingAnnotation.title = newValue }
     }

@@ -16,14 +16,14 @@ import MapKit
 /// This is the annotation view for the callout annotation.
 
 class CalloutAnnotationView : MKAnnotationView {
-    override init!(annotation: MKAnnotation!, reuseIdentifier: String!) {
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 
         // if the annotation is a callout annotation (and that's the only thing that this should ever
         // be used for!), then add an observer for its title.
         
         if let calloutAnnotation = annotation as? CalloutAnnotation {
-            calloutAnnotation.underlyingAnnotation.addObserver(self, forKeyPath: "title", options: nil, context: nil)
+            calloutAnnotation.underlyingAnnotation.addObserver(self, forKeyPath: "title", options: [], context: nil)
         } else {
             assert(false, "this annotation view class should only be used with CalloutAnnotation objects")
         }
@@ -31,7 +31,7 @@ class CalloutAnnotationView : MKAnnotationView {
         configure()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -41,7 +41,7 @@ class CalloutAnnotationView : MKAnnotationView {
 
     // if we (re)set the annotation, remove old observer for title, if any and add new one
     
-    override var annotation: MKAnnotation! {
+    override var annotation: MKAnnotation? {
         willSet {
             if let calloutAnnotation = annotation as? CalloutAnnotation {
                 calloutAnnotation.underlyingAnnotation.removeObserver(self, forKeyPath: "title")
@@ -50,7 +50,7 @@ class CalloutAnnotationView : MKAnnotationView {
         didSet {
             updateCallout()
             if let calloutAnnotation = annotation as? CalloutAnnotation {
-                calloutAnnotation.underlyingAnnotation.addObserver(self, forKeyPath: "title", options: nil, context: nil)
+                calloutAnnotation.underlyingAnnotation.addObserver(self, forKeyPath: "title", options: [], context: nil)
             }
         }
     }
@@ -65,7 +65,7 @@ class CalloutAnnotationView : MKAnnotationView {
     
     // if the title changes, update the callout accordingly
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         updateCallout()
     }
     
@@ -83,9 +83,9 @@ class CalloutAnnotationView : MKAnnotationView {
         var size = CGSizeZero
         if let string = annotation?.title where string != nil {
             let attributes = [NSFontAttributeName : font]
-            println(string)
-            size = string.sizeWithAttributes(attributes)
-            label.text = annotation?.title
+            print(string)
+            size = string!.sizeWithAttributes(attributes)
+            label.text = (annotation?.title)!
         }
         if size.width < 30 {
             size.width = 30
@@ -103,7 +103,7 @@ class CalloutAnnotationView : MKAnnotationView {
         addSubview(bubbleView)
         
         label.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
-        label.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        label.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         label.textAlignment = .Center
         label.font = font
         label.textColor = UIColor.whiteColor()

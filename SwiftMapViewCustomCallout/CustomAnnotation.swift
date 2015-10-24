@@ -25,7 +25,7 @@ class CustomAnnotation : MKPointAnnotation {
         didSet {
             let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             CustomAnnotation.geocoder.reverseGeocodeLocation(location) { placemarks, error in
-                if let placemark = placemarks?.first as? CLPlacemark {
+                if let placemark = placemarks?.first {
                     self.title = placemark.name
                 }
             }

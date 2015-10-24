@@ -39,23 +39,23 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     // If `CustomAnnotation`, show standard `MKPinAnnotationView`. If `CalloutAnnotation`, show `CalloutAnnotationView`.
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is CustomAnnotation {
             var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
             if pin == nil {
                 pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
-                pin.canShowCallout = false
+                pin?.canShowCallout = false
             } else {
-                pin.annotation = annotation
+                pin?.annotation = annotation
             }
             return pin
         } else if annotation is CalloutAnnotation {
             var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(calloutAnnotationViewIdentifier)
             if pin == nil {
                 pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: calloutAnnotationViewIdentifier)
-                pin.canShowCallout = false
+                pin?.canShowCallout = false
             } else {
-                pin.annotation = annotation
+                pin?.annotation = annotation
             }
             return pin
         }
@@ -66,7 +66,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     // If user selects annotation view for `CustomAnnotation`, then show callout for it. Automatically select
     // that new callout annotation, too.
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if let annotation = view.annotation as? CustomAnnotation {
             let calloutAnnotation = CalloutAnnotation(annotation: annotation)
             mapView.addAnnotation(calloutAnnotation)
@@ -78,7 +78,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     /// If user unselects callout annotation view, then remove it.
     
-    func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         if let annotation = view.annotation as? CalloutAnnotation {
             mapView.removeAnnotation(annotation)
         }
