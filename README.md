@@ -14,7 +14,7 @@ This is not intended as an end-user library, but just a "simple" example of how 
 
 See http://stackoverflow.com/a/30824051/1271826.
 
-Developed in Swift on Xcode 7.3.1 for iOS 9 using Swift 2. But, the basic ideas are equally applicable for different versions of Swift and Objective-C. 
+Developed in Swift on Xcode 8 for iOS 10 using Swift 3. See the `swift2` branch for Swift 2 on iOS 9. But, the basic ideas are equally applicable for different versions of Swift and Objective-C. 
 
 ## License
 

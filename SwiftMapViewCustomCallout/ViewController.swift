@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    @IBAction func didTapButton(sender: UIButton) {
+    @IBAction func didTapButton(_ sender: UIButton) {
         addAnnotation(for: mapView.centerCoordinate)
     }
     
@@ -49,12 +49,12 @@ extension ViewController: MKMapViewDelegate {
 
     /// show custom annotation view
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation { return nil }
         
         let customAnnotationViewIdentifier = "MyAnnotation"
         
-        var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
+        var pin = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotationViewIdentifier)
         if pin == nil {
             pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
             pin?.canShowCallout = false
@@ -66,7 +66,7 @@ extension ViewController: MKMapViewDelegate {
     
     /// If user selects annotation view for `CustomAnnotation`, then show callout for it.
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotationView = view as? CustomAnnotationView else { return }
         guard let annotation = annotationView.annotation as? MKPointAnnotation else { return }
         
@@ -81,7 +81,7 @@ extension ViewController: MKMapViewDelegate {
     
     /// If user deselects annotation view, then remove any callout.
     
-    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         guard let annotationView = view as? CustomAnnotationView else { return }
         if let calloutView = annotationView.calloutView {
             calloutView.removeFromSuperview()

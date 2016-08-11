@@ -22,11 +22,11 @@ import MapKit
 class CalloutView: UIView {
     
     enum BubblePointerType {
-        case Rounded
-        case Straight(angle: CGFloat)
+        case rounded
+        case straight(angle: CGFloat)
     }
 
-    private let bubblePointerType = BubblePointerType.Rounded
+    private let bubblePointerType = BubblePointerType.rounded
     
     /// Insets for rounding of callout bubble's corners
     ///
@@ -38,10 +38,10 @@ class CalloutView: UIView {
     
     private lazy var bubbleLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.strokeColor = UIColor.blackColor().CGColor
-        layer.fillColor = UIColor.blueColor().CGColor
+        layer.strokeColor = UIColor.black.cgColor
+        layer.fillColor = UIColor.blue.cgColor
         layer.lineWidth = 0.5
-        self.layer.insertSublayer(layer, atIndex: 0)
+        self.layer.insertSublayer(layer, at: 0)
         return layer
     }()
     
@@ -54,13 +54,13 @@ class CalloutView: UIView {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(contentView)
-        NSLayoutConstraint.activateConstraints([
-            contentView.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: self.inset.top / 2.0),
-            contentView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -self.inset.bottom - self.inset.right / 2.0),
-            contentView.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: self.inset.left / 2.0),
-            contentView.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -self.inset.right / 2.0),
-            contentView.widthAnchor.constraintGreaterThanOrEqualToConstant(self.inset.left + self.inset.right),
-            contentView.widthAnchor.constraintGreaterThanOrEqualToConstant(self.inset.top + self.inset.bottom)
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: self.inset.top / 2.0),
+            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.inset.bottom - self.inset.right / 2.0),
+            contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.inset.left / 2.0),
+            contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -self.inset.right / 2.0),
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.left + self.inset.right),
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.top + self.inset.bottom)
         ])
         return contentView
     }()
@@ -100,92 +100,92 @@ class CalloutView: UIView {
         var controlPoint: CGPoint
         
         point = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
-        path.moveToPoint(point)
+        path.move(to: point)
 
         switch bubblePointerType {
-        case .Rounded:
+        case .rounded:
             // lower right
             point = CGPoint(x: bounds.size.width / 2.0 + inset.bottom, y: bounds.size.height - inset.bottom)
-            path.addLineToPoint(point)
+            path.addLine(to: point)
             
             // right side of arrow
             
             controlPoint = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height - inset.bottom)
             point = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height)
-            path.addQuadCurveToPoint(point, controlPoint: controlPoint)
+            path.addQuadCurve(to: point, controlPoint: controlPoint)
             
             // left of pointer
 
             controlPoint = CGPoint(x: point.x, y: bounds.size.height - inset.bottom)
             point = CGPoint(x: point.x - inset.bottom, y: controlPoint.y)
-            path.addQuadCurveToPoint(point, controlPoint: controlPoint)
-        case .Straight(let angle):
+            path.addQuadCurve(to: point, controlPoint: controlPoint)
+        case .straight(let angle):
             print(angle)
             //0.392699081698724
             //(52.0721286584462, 38.6666666666666)
             // lower right
             point = CGPoint(x: bounds.size.width / 2.0 + tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
             print(point)
-            path.addLineToPoint(point)
+            path.addLine(to: point)
             
             // right side of arrow
             
             point = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height)
-            path.addLineToPoint(point)
+            path.addLine(to: point)
             
             // left of pointer
             
             point = CGPoint(x: bounds.size.width / 2.0 - tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
-            path.addLineToPoint(point)
+            path.addLine(to: point)
         }
         
         // bottom left
         
         point.x = inset.left
-        path.addLineToPoint(point)
+        path.addLine(to: point)
         
         // lower left corner
         
         controlPoint = CGPoint(x: 0, y: bounds.size.height - inset.bottom)
         point = CGPoint(x: 0, y: controlPoint.y - inset.left)
-        path.addQuadCurveToPoint(point, controlPoint: controlPoint)
+        path.addQuadCurve(to: point, controlPoint: controlPoint)
         
         // left
         
         point.y = inset.top
-        path.addLineToPoint(point)
+        path.addLine(to: point)
         
         // top left corner
         
         controlPoint = CGPoint.zero
         point = CGPoint(x: inset.left, y: 0)
-        path.addQuadCurveToPoint(point, controlPoint: controlPoint)
+        path.addQuadCurve(to: point, controlPoint: controlPoint)
         
         // top
         
         point = CGPoint(x: bounds.size.width - inset.left, y: 0)
-        path.addLineToPoint(point)
+        path.addLine(to: point)
         
         // top right corner
         
         controlPoint = CGPoint(x: bounds.size.width, y: 0)
         point = CGPoint(x: bounds.size.width, y: inset.top)
-        path.addQuadCurveToPoint(point, controlPoint: controlPoint)
+        path.addQuadCurve(to: point, controlPoint: controlPoint)
         
         // right
         
         point = CGPoint(x: bounds.size.width, y: bounds.size.height - inset.bottom - inset.right)
-        path.addLineToPoint(point)
+        path.addLine(to: point)
         
         // lower right corner
         
         controlPoint = CGPoint(x:bounds.size.width, y: bounds.size.height - inset.bottom)
         point = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
-        path.addQuadCurveToPoint(point, controlPoint: controlPoint)
+        path.addQuadCurve(to: point, controlPoint: controlPoint)
         
-        path.closePath()
+        path.close()
         
-        bubbleLayer.path = path.CGPath
+        bubbleLayer.path = path.cgPath
     }
 
     /// Add this `CalloutView` to an annotation view (i.e. show the callout on the map above the pin)
@@ -195,9 +195,9 @@ class CalloutView: UIView {
         
         // constraints for this callout with respect to its superview
         
-        NSLayoutConstraint.activateConstraints([
-            bottomAnchor.constraintEqualToAnchor(annotationView.topAnchor, constant: annotationView.calloutOffset.y),
-            centerXAnchor.constraintEqualToAnchor(annotationView.centerXAnchor, constant: annotationView.calloutOffset.x)
+        NSLayoutConstraint.activate([
+            bottomAnchor.constraint(equalTo: annotationView.topAnchor, constant: annotationView.calloutOffset.y),
+            centerXAnchor.constraint(equalTo: annotationView.centerXAnchor, constant: annotationView.calloutOffset.x)
         ])
     }
     

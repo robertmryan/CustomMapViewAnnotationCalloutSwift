@@ -29,8 +29,8 @@ class ExampleCalloutView: CalloutView {
     var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.whiteColor()
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCallout)
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCallout)
         
         return label
     }()
@@ -38,8 +38,8 @@ class ExampleCalloutView: CalloutView {
     var subtitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.whiteColor()
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1)
         
         return label
     }()
@@ -61,7 +61,7 @@ class ExampleCalloutView: CalloutView {
         ]
         
         for vfl in vflStrings {
-            contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(vfl, options: [], metrics: nil, views: views))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: vfl, options: [], metrics: nil, views: views))
         }
     }
     
@@ -110,11 +110,11 @@ extension ExampleCalloutView {
         annotation.removeObserver(self, forKeyPath: "subtitle")
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         if context == &observerContext {
             updateContents()
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
