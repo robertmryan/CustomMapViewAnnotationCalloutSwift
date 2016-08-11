@@ -3,7 +3,7 @@
 //  SwiftMapViewCustomCallout
 //
 //  Created by Robert Ryan on 6/15/15.
-//  Copyright (c) 2015 Robert Ryan. All rights reserved.
+//  Copyright © 2015-2016 Robert Ryan. All rights reserved.
 //
 //  This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
 //  http://creativecommons.org/licenses/by-sa/4.0/
@@ -11,7 +11,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,67 +20,71 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func didTapButton(sender: UIButton) {
+        addAnnotation(for: mapView.centerCoordinate)
     }
     
-    @IBAction func didTapButton(sender: UIButton) {
-        let annotation = CustomAnnotation()
-        annotation.coordinate = mapView.centerCoordinate
+    let geocoder = CLGeocoder()
+    
+    func addAnnotation(for coordinate: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = "Retrieving information..."
         
         mapView.addAnnotation(annotation)
+        
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let placemark = placemarks?.first {
+                annotation.title = placemark.name
+                annotation.subtitle = placemark.locality
+            }
+        }
     }
-    
-    // define annotation view identifiers
-    
-    let calloutAnnotationViewIdentifier = "CalloutAnnotation"
-    let customAnnotationViewIdentifier = "MyAnnotation"
-    
-    // If `CustomAnnotation`, show standard `MKPinAnnotationView`. If `CalloutAnnotation`, show `CalloutAnnotationView`.
+}
+
+// MARK: - MKMapViewDelegate
+
+extension ViewController: MKMapViewDelegate {
+
+    /// show custom annotation view
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is CustomAnnotation {
-            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
-            if pin == nil {
-                pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
-                pin?.canShowCallout = false
-            } else {
-                pin?.annotation = annotation
-            }
-            return pin
-        } else if annotation is CalloutAnnotation {
-            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(calloutAnnotationViewIdentifier)
-            if pin == nil {
-                pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: calloutAnnotationViewIdentifier)
-                pin?.canShowCallout = false
-            } else {
-                pin?.annotation = annotation
-            }
-            return pin
-        }
+        if annotation is MKUserLocation { return nil }
         
-        return nil
+        let customAnnotationViewIdentifier = "MyAnnotation"
+        
+        var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
+        if pin == nil {
+            pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
+            pin?.canShowCallout = false
+        } else {
+            pin?.annotation = annotation
+        }
+        return pin
     }
     
-    // If user selects annotation view for `CustomAnnotation`, then show callout for it. Automatically select
-    // that new callout annotation, too.
+    /// If user selects annotation view for `CustomAnnotation`, then show callout for it.
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        if let annotation = view.annotation as? CustomAnnotation {
-            let calloutAnnotation = CalloutAnnotation(annotation: annotation)
-            mapView.addAnnotation(calloutAnnotation)
-            dispatch_async(dispatch_get_main_queue()) {
-                mapView.selectAnnotation(calloutAnnotation, animated: false)
-            }
+        guard let annotationView = view as? CustomAnnotationView else { return }
+        guard let annotation = annotationView.annotation as? MKPointAnnotation else { return }
+        
+        if let calloutView = annotationView.calloutView {
+            calloutView.removeFromSuperview()
         }
+        
+        let calloutView = ExampleCalloutView(annotation: annotation)
+        calloutView.add(to: annotationView)
+        annotationView.calloutView = calloutView
     }
     
-    /// If user unselects callout annotation view, then remove it.
+    /// If user deselects annotation view, then remove any callout.
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
-        if let annotation = view.annotation as? CalloutAnnotation {
-            mapView.removeAnnotation(annotation)
+        guard let annotationView = view as? CustomAnnotationView else { return }
+        if let calloutView = annotationView.calloutView {
+            calloutView.removeFromSuperview()
         }
     }
 }

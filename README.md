@@ -2,17 +2,23 @@
 
 This is an demonstration of a custom map view annotation callouts in Swift.
 
-The map view doesn't offer a nice way to customize the callout for an annotation view. So, the pattern illustrated in this example is to show how one can (a) turn off the callout; (b) and when user selects annotation view, add our own callout. The trick is that this custom callout is created by creating a second type of annotation, a `CalloutAnnotation` which will have its own `CalloutAnnotationView`, and its this `CalloutAnnotationView` which will manifest the views associated with the original annotation's annotation view.
+The easiest way to customize callouts is to implement the `leftAccessoryView` and `rightAccessoryView`. If you want more considerable changes for what appears below the title in the callout (e.g. add some custom imagery or whatever), you can also implement the `detailAccessoryView`.
 
-This is not intended as an end-user library, but just a quick and dirty example of how one might create custom callouts. This is for illustrative purposes only.
+But sometimes, even that is insufficient. For example, if you want to change the background color of the callout, or change the shape of the callout bubble, or whatever, adjusting the various accessory views is insufficient. In those cases, you can disable the standard the MapKit callout, and generate your own. You simply have to identify when the callout is selected, and then add a subview to the annotation view.
+
+When you go down this road, though, you're signing up for the manual rendering of the callout yourself. It gives you the ultimate level of control, but takes considerably more work.
+
+In this project, I have an abstract `CalloutView` class that renders a custom callout bubble, and has a `contentView` associated with it. In my concrete subclass of this, `ExampleCalloutView`, I add two text labels. Clearly you can do something more substantial than that, but I wanted to do enough here so that you could see that you have fine-grained control over the appearance (in this case, changing the background color and the `UIBezierPath` shape around the callout).
+
+This is not intended as an end-user library, but just a "simple" example of how one might create custom callouts. This is for illustrative purposes only.
 
 See http://stackoverflow.com/a/30824051/1271826.
 
-Developed in Swift on Xcode 6.3.2 for iOS 8.3 using Swift 1.2. Also, the basic ideas are equally applicable for both Swift and Objective-C. 
+Developed in Swift on Xcode 7.3.1 for iOS 9 using Swift 2. But, the basic ideas are equally applicable for different versions of Swift and Objective-C. 
 
 ## License
 
-Copyright &copy; 2015 Robert Ryan. All rights reserved.
+Copyright &copy; 2015-2016 Robert Ryan. All rights reserved.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 

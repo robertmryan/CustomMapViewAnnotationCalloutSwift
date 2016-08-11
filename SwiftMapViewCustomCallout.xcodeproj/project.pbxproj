@@ -14,10 +14,9 @@
 		830D05941B2E992C00EF8033 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830D05921B2E992C00EF8033 /* LaunchScreen.xib */; };
 		830D05A01B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */; };
 		830D05AA1B2E995700EF8033 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830D05A91B2E995700EF8033 /* MapKit.framework */; };
-		830D05AF1B2E99C400EF8033 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AB1B2E99C400EF8033 /* BubbleView.swift */; };
-		830D05B01B2E99C400EF8033 /* CalloutAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AC1B2E99C400EF8033 /* CalloutAnnotation.swift */; };
-		830D05B11B2E99C400EF8033 /* CalloutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AD1B2E99C400EF8033 /* CalloutAnnotationView.swift */; };
-		830D05B21B2E99C400EF8033 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D05AE1B2E99C400EF8033 /* CustomAnnotation.swift */; };
+		837198361D5C0FC400687CBA /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198351D5C0FC400687CBA /* CalloutView.swift */; };
+		837198381D5C108300687CBA /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198371D5C108300687CBA /* CustomAnnotationView.swift */; };
+		8371983A1D5C43B000687CBA /* ExampleCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198391D5C43B000687CBA /* ExampleCalloutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,11 +41,10 @@
 		830D059E1B2E992E00EF8033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMapViewCustomCalloutTests.swift; sourceTree = "<group>"; };
 		830D05A91B2E995700EF8033 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		830D05AB1B2E99C400EF8033 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
-		830D05AC1B2E99C400EF8033 /* CalloutAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutAnnotation.swift; sourceTree = "<group>"; };
-		830D05AD1B2E99C400EF8033 /* CalloutAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutAnnotationView.swift; sourceTree = "<group>"; };
-		830D05AE1B2E99C400EF8033 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		830D05B31B2E9E2C00EF8033 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		837198351D5C0FC400687CBA /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
+		837198371D5C108300687CBA /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		837198391D5C43B000687CBA /* ExampleCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCalloutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +90,9 @@
 			children = (
 				830D05891B2E992700EF8033 /* AppDelegate.swift */,
 				830D058B1B2E992800EF8033 /* ViewController.swift */,
-				830D05AE1B2E99C400EF8033 /* CustomAnnotation.swift */,
-				830D05AC1B2E99C400EF8033 /* CalloutAnnotation.swift */,
-				830D05AD1B2E99C400EF8033 /* CalloutAnnotationView.swift */,
-				830D05AB1B2E99C400EF8033 /* BubbleView.swift */,
+				837198371D5C108300687CBA /* CustomAnnotationView.swift */,
+				837198351D5C0FC400687CBA /* CalloutView.swift */,
+				837198391D5C43B000687CBA /* ExampleCalloutView.swift */,
 				830D058D1B2E992A00EF8033 /* Main.storyboard */,
 				830D05901B2E992C00EF8033 /* Images.xcassets */,
 				830D05921B2E992C00EF8033 /* LaunchScreen.xib */,
@@ -237,12 +234,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830D05AF1B2E99C400EF8033 /* BubbleView.swift in Sources */,
-				830D05B01B2E99C400EF8033 /* CalloutAnnotation.swift in Sources */,
 				830D058C1B2E992800EF8033 /* ViewController.swift in Sources */,
-				830D05B11B2E99C400EF8033 /* CalloutAnnotationView.swift in Sources */,
 				830D058A1B2E992700EF8033 /* AppDelegate.swift in Sources */,
-				830D05B21B2E99C400EF8033 /* CustomAnnotation.swift in Sources */,
+				837198381D5C108300687CBA /* CustomAnnotationView.swift in Sources */,
+				8371983A1D5C43B000687CBA /* ExampleCalloutView.swift in Sources */,
+				837198361D5C0FC400687CBA /* CalloutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwiftMapViewCustomCallout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmryan.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -382,6 +379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwiftMapViewCustomCallout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmryan.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
