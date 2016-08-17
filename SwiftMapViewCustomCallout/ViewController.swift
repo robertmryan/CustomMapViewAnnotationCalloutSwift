@@ -27,17 +27,14 @@ class ViewController: UIViewController {
     let geocoder = CLGeocoder()
     
     func addAnnotation(for coordinate: CLLocationCoordinate2D) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = "Retrieving information..."
-        
-        mapView.addAnnotation(annotation)
-        
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let placemark = placemarks?.first {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate
                 annotation.title = placemark.name
                 annotation.subtitle = placemark.locality
+                self.mapView.addAnnotation(annotation)
             }
         }
     }
@@ -57,35 +54,11 @@ extension ViewController: MKMapViewDelegate {
         var pin = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotationViewIdentifier)
         if pin == nil {
             pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
-            pin?.canShowCallout = false
         } else {
             pin?.annotation = annotation
         }
         return pin
     }
     
-    /// If user selects annotation view for `CustomAnnotation`, then show callout for it.
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let annotationView = view as? CustomAnnotationView else { return }
-        guard let annotation = annotationView.annotation as? MKPointAnnotation else { return }
-        
-        if let calloutView = annotationView.calloutView {
-            calloutView.removeFromSuperview()
-        }
-        
-        let calloutView = ExampleCalloutView(annotation: annotation)
-        calloutView.add(to: annotationView)
-        annotationView.calloutView = calloutView
-    }
-    
-    /// If user deselects annotation view, then remove any callout.
-    
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        guard let annotationView = view as? CustomAnnotationView else { return }
-        if let calloutView = annotationView.calloutView {
-            calloutView.removeFromSuperview()
-        }
-    }
 }
 

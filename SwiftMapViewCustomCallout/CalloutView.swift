@@ -65,11 +65,8 @@ class CalloutView: UIView {
         return contentView
     }()
     
-    var annotation: MKPointAnnotation?
     
-    init(annotation: MKPointAnnotation) {
-        self.annotation = annotation
-
+    init() {
         super.init(frame: CGRect.zero)
 
         translatesAutoresizingMaskIntoConstraints = false

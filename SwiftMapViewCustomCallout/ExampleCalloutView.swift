@@ -30,7 +30,7 @@ class ExampleCalloutView: CalloutView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCallout)
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
         
         return label
     }()
@@ -39,7 +39,7 @@ class ExampleCalloutView: CalloutView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1)
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
         
         return label
     }()
@@ -65,57 +65,23 @@ class ExampleCalloutView: CalloutView {
         }
     }
     
-    override init(annotation: MKPointAnnotation) {
-        super.init(annotation: annotation)
-        
-        addObservers(for: annotation)
+    init(annotation: MKShape) {
+        super.init()
         
         configure()
         
-        updateContents()
+        updateContents(for: annotation)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Should not call init(coder:)")
     }
     
-    deinit {
-        if let annotation = annotation {
-            removeObservers(for: annotation)
-        }
-    }
-    
     /// Update callout contents
     
-    private func updateContents() {
-        titleLabel.text = annotation?.title ?? "Retrieving..."
-        subtitleLabel.text = annotation?.subtitle
-    }
-    
-}
-
-private var observerContext = 0
-
-// MARK: - Observers
-
-extension ExampleCalloutView {
-    
-    private func addObservers(for annotation: MKPointAnnotation) {
-        annotation.addObserver(self, forKeyPath: "title", options: [], context: &observerContext)
-        annotation.addObserver(self, forKeyPath: "subtitle", options: [], context: &observerContext)
-    }
-    
-    private func removeObservers(for annotation: MKPointAnnotation) {
-        annotation.removeObserver(self, forKeyPath: "title")
-        annotation.removeObserver(self, forKeyPath: "subtitle")
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
-        if context == &observerContext {
-            updateContents()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
+    private func updateContents(for annotation: MKShape) {
+        titleLabel.text = annotation.title ?? "Unknown"
+        subtitleLabel.text = annotation.subtitle
     }
     
 }

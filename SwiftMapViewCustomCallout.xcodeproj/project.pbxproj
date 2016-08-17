@@ -12,22 +12,11 @@
 		830D058F1B2E992A00EF8033 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830D058D1B2E992A00EF8033 /* Main.storyboard */; };
 		830D05911B2E992C00EF8033 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830D05901B2E992C00EF8033 /* Images.xcassets */; };
 		830D05941B2E992C00EF8033 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830D05921B2E992C00EF8033 /* LaunchScreen.xib */; };
-		830D05A01B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */; };
 		830D05AA1B2E995700EF8033 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830D05A91B2E995700EF8033 /* MapKit.framework */; };
 		837198361D5C0FC400687CBA /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198351D5C0FC400687CBA /* CalloutView.swift */; };
 		837198381D5C108300687CBA /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198371D5C108300687CBA /* CustomAnnotationView.swift */; };
 		8371983A1D5C43B000687CBA /* ExampleCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198391D5C43B000687CBA /* ExampleCalloutView.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		830D059A1B2E992E00EF8033 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 830D057C1B2E992200EF8033 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 830D05831B2E992300EF8033;
-			remoteInfo = SwiftMapViewCustomCallout;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		830D05841B2E992300EF8033 /* SwiftMapViewCustomCallout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMapViewCustomCallout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,9 +26,6 @@
 		830D058E1B2E992A00EF8033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		830D05901B2E992C00EF8033 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		830D05931B2E992C00EF8033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		830D05991B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftMapViewCustomCalloutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		830D059E1B2E992E00EF8033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMapViewCustomCalloutTests.swift; sourceTree = "<group>"; };
 		830D05A91B2E995700EF8033 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		830D05B31B2E9E2C00EF8033 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		837198351D5C0FC400687CBA /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
@@ -56,13 +42,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		830D05961B2E992E00EF8033 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,7 +50,6 @@
 			children = (
 				830D05B31B2E9E2C00EF8033 /* README.md */,
 				830D05861B2E992400EF8033 /* SwiftMapViewCustomCallout */,
-				830D059C1B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests */,
 				830D05851B2E992300EF8033 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				830D05841B2E992300EF8033 /* SwiftMapViewCustomCallout.app */,
-				830D05991B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,23 +87,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		830D059C1B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests */ = {
-			isa = PBXGroup;
-			children = (
-				830D059F1B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift */,
-				830D059D1B2E992E00EF8033 /* Supporting Files */,
-			);
-			path = SwiftMapViewCustomCalloutTests;
-			sourceTree = "<group>";
-		};
-		830D059D1B2E992E00EF8033 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				830D059E1B2E992E00EF8033 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,24 +106,6 @@
 			productName = SwiftMapViewCustomCallout;
 			productReference = 830D05841B2E992300EF8033 /* SwiftMapViewCustomCallout.app */;
 			productType = "com.apple.product-type.application";
-		};
-		830D05981B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 830D05A61B2E992F00EF8033 /* Build configuration list for PBXNativeTarget "SwiftMapViewCustomCalloutTests" */;
-			buildPhases = (
-				830D05951B2E992E00EF8033 /* Sources */,
-				830D05961B2E992E00EF8033 /* Frameworks */,
-				830D05971B2E992E00EF8033 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				830D059B1B2E992E00EF8033 /* PBXTargetDependency */,
-			);
-			name = SwiftMapViewCustomCalloutTests;
-			productName = SwiftMapViewCustomCalloutTests;
-			productReference = 830D05991B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -186,11 +128,6 @@
 							};
 						};
 					};
-					830D05981B2E992E00EF8033 = {
-						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 0800;
-						TestTargetID = 830D05831B2E992300EF8033;
-					};
 				};
 			};
 			buildConfigurationList = 830D057F1B2E992200EF8033 /* Build configuration list for PBXProject "SwiftMapViewCustomCallout" */;
@@ -207,7 +144,6 @@
 			projectRoot = "";
 			targets = (
 				830D05831B2E992300EF8033 /* SwiftMapViewCustomCallout */,
-				830D05981B2E992E00EF8033 /* SwiftMapViewCustomCalloutTests */,
 			);
 		};
 /* End PBXProject section */
@@ -220,13 +156,6 @@
 				830D058F1B2E992A00EF8033 /* Main.storyboard in Resources */,
 				830D05941B2E992C00EF8033 /* LaunchScreen.xib in Resources */,
 				830D05911B2E992C00EF8033 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		830D05971B2E992E00EF8033 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,23 +174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		830D05951B2E992E00EF8033 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				830D05A01B2E992F00EF8033 /* SwiftMapViewCustomCalloutTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		830D059B1B2E992E00EF8033 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 830D05831B2E992300EF8033 /* SwiftMapViewCustomCallout */;
-			targetProxy = 830D059A1B2E992E00EF8033 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		830D058D1B2E992A00EF8033 /* Main.storyboard */ = {
@@ -398,39 +311,6 @@
 			};
 			name = Release;
 		};
-		830D05A71B2E992F00EF8033 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftMapViewCustomCalloutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmryan.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftMapViewCustomCallout.app/SwiftMapViewCustomCallout";
-			};
-			name = Debug;
-		};
-		830D05A81B2E992F00EF8033 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftMapViewCustomCalloutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.robertmryan.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftMapViewCustomCallout.app/SwiftMapViewCustomCallout";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -448,15 +328,6 @@
 			buildConfigurations = (
 				830D05A41B2E992F00EF8033 /* Debug */,
 				830D05A51B2E992F00EF8033 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		830D05A61B2E992F00EF8033 /* Build configuration list for PBXNativeTarget "SwiftMapViewCustomCalloutTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				830D05A71B2E992F00EF8033 /* Debug */,
-				830D05A81B2E992F00EF8033 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
