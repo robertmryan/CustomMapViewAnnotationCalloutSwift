@@ -54,7 +54,6 @@ extension ViewController: MKMapViewDelegate {
         var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
         if pin == nil {
             pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
-            pin?.canShowCallout = false
         } else {
             pin?.annotation = annotation
         }
