@@ -65,57 +65,23 @@ class ExampleCalloutView: CalloutView {
         }
     }
     
-    override init(annotation: MKPointAnnotation) {
-        super.init(annotation: annotation)
-        
-        addObservers(for: annotation)
+    init(annotation: MKShape) {
+        super.init()
         
         configure()
         
-        updateContents()
+        updateContents(annotation)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Should not call init(coder:)")
     }
     
-    deinit {
-        if let annotation = annotation {
-            removeObservers(for: annotation)
-        }
-    }
-    
     /// Update callout contents
     
-    private func updateContents() {
-        titleLabel.text = annotation?.title ?? "Retrieving..."
-        subtitleLabel.text = annotation?.subtitle
-    }
-    
-}
-
-private var observerContext = 0
-
-// MARK: - Observers
-
-extension ExampleCalloutView {
-    
-    private func addObservers(for annotation: MKPointAnnotation) {
-        annotation.addObserver(self, forKeyPath: "title", options: [], context: &observerContext)
-        annotation.addObserver(self, forKeyPath: "subtitle", options: [], context: &observerContext)
-    }
-    
-    private func removeObservers(for annotation: MKPointAnnotation) {
-        annotation.removeObserver(self, forKeyPath: "title")
-        annotation.removeObserver(self, forKeyPath: "subtitle")
-    }
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if context == &observerContext {
-            updateContents()
-        } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
-        }
+    private func updateContents(annotation: MKShape) {
+        titleLabel.text = annotation.title ?? "Unknown"
+        subtitleLabel.text = annotation.subtitle
     }
     
 }

@@ -14,14 +14,11 @@ import MapKit
 
 class CustomAnnotationView: MKPinAnnotationView {
     
-    weak var calloutView: CalloutView?
+    weak var calloutView: ExampleCalloutView?
     
     override var annotation: MKAnnotation? {
         willSet {
-            calloutView?.annotation = nil
-        }
-        didSet {
-            calloutView?.annotation = annotation as? MKPointAnnotation
+            calloutView?.removeFromSuperview()
         }
     }
     
@@ -38,6 +35,33 @@ class CustomAnnotationView: MKPinAnnotationView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    let animationDuration: NSTimeInterval = 0.25
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        if selected {
+            let calloutView = ExampleCalloutView(annotation: annotation as! MKShape)
+            calloutView.add(to: self)
+            self.calloutView = calloutView
+            
+            if animated {
+                calloutView.alpha = 0
+                UIView.animateWithDuration(animationDuration) {
+                    calloutView.alpha = 1
+                }
+            }
+        } else {
+            if animated {
+                UIView.animateWithDuration(animationDuration, animations: { 
+                    self.calloutView?.alpha = 0
+                }, completion: { finished in
+                    self.calloutView?.removeFromSuperview()
+                })
+            } else {
+                calloutView?.removeFromSuperview()
+            }
+        }
     }
     
 }
