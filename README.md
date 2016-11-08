@@ -10,11 +10,13 @@ When you go down this road, though, you're signing up for the manual rendering o
 
 In this project, I have an abstract `CalloutView` class that renders a custom callout bubble, and has a `contentView` associated with it. In my concrete subclass of this, `ExampleCalloutView`, I add two text labels. Clearly you can do something more substantial than that, but I wanted to do enough here so that you could see that you have fine-grained control over the appearance (in this case, changing the background color and the `UIBezierPath` shape around the callout).
 
+I have also expanded this to detect taps on the callout, namely (a) adding a `hitTest` to the annotation view to included the callout, if present; and (b) added `hitTest` to callout base class to detect taps within the bubble. Then you can do things like adding a tap gesture recognizer to the callout. 
+
 This is not intended as an end-user library, but just a "simple" example of how one might create custom callouts. This is for illustrative purposes only.
 
 See http://stackoverflow.com/a/30824051/1271826.
 
-Developed in Swift on Xcode 8 for iOS 10 using Swift 3. See the `swift2` branch for Swift 2 on iOS 9. But, the basic ideas are equally applicable for different versions of Swift and Objective-C. 
+Developed in Swift on Xcode 8.1 for iOS 10 using Swift 3. See the `swift2` branch for Swift 2 on iOS 9. But, the basic ideas are equally applicable for different versions of Swift and Objective-C. 
 
 ## License
 

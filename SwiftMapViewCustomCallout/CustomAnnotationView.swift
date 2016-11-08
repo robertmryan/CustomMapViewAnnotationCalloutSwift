@@ -60,6 +60,18 @@ class CustomAnnotationView: MKPinAnnotationView {
         }
     }
     
-
+    // Per the Location and Maps Programming Guide, if you want to detect taps on callout,
+    // you have to expand the hitTest for the annotation itself.
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        var hitView = super.hitTest(point, with: event)
+        
+        if let calloutView = calloutView, hitView == nil {
+            let pointInCalloutView = convert(point, to: calloutView)
+            hitView = calloutView.hitTest(pointInCalloutView, with: event)
+        }
+        return hitView;
+    }
+    
 }
 

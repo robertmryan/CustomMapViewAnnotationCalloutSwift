@@ -84,11 +84,23 @@ class CalloutView: UIView {
         updatePath()
     }
     
+    // Override hitTest to detect taps within our callout bubble
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let doesContain = path?.contains(point) ?? false
+        if doesContain { return self }
+        return nil
+    }
+    
+    /// In order to do the above hitTest, we'll save the bezier path build in `updatePath`
+    
+    private var path: UIBezierPath?
+
     /// Update `UIBezierPath` for callout bubble
     ///
     /// The setting of the bubblePointerType dictates whether the pointer at the bottom of the
     /// bubble has straight lines or whether it has rounded corners.
-
+    
     private func updatePath() {
         let path = UIBezierPath()
         
@@ -181,6 +193,8 @@ class CalloutView: UIView {
         path.addQuadCurve(to: point, controlPoint: controlPoint)
         
         path.close()
+        
+        self.path = path
         
         bubbleLayer.path = path.cgPath
     }

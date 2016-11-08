@@ -26,7 +26,7 @@ import MapKit
 
 class ExampleCalloutView: CalloutView {
 
-    var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
@@ -35,7 +35,7 @@ class ExampleCalloutView: CalloutView {
         return label
     }()
     
-    var subtitleLabel: UILabel = {
+    private var subtitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
@@ -43,6 +43,25 @@ class ExampleCalloutView: CalloutView {
         
         return label
     }()
+    
+    init(annotation: MKShape) {
+        super.init()
+        
+        configure()
+        
+        updateContents(for: annotation)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("Should not call init(coder:)")
+    }
+    
+    /// Update callout contents
+    
+    private func updateContents(for annotation: MKShape) {
+        titleLabel.text = annotation.title ?? "Unknown"
+        subtitleLabel.text = annotation.subtitle
+    }
     
     /// Add constraints for subviews of `contentView`
     
@@ -63,25 +82,16 @@ class ExampleCalloutView: CalloutView {
         for vfl in vflStrings {
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: vfl, options: [], metrics: nil, views: views))
         }
-    }
-    
-    init(annotation: MKShape) {
-        super.init()
         
-        configure()
+        // if you don't want to detect tap on this callout view, comment out the following three lines
         
-        updateContents(for: annotation)
+        isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        addGestureRecognizer(tap)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("Should not call init(coder:)")
-    }
-    
-    /// Update callout contents
-    
-    private func updateContents(for annotation: MKShape) {
-        titleLabel.text = annotation.title ?? "Unknown"
-        subtitleLabel.text = annotation.subtitle
+    func handleTap(_ gesture: UITapGestureRecognizer) {
+        print("tap")
     }
     
 }
