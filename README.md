@@ -10,7 +10,7 @@ When you go down this road, though, you're signing up for the manual rendering o
 
 In this project, I have an abstract `CalloutView` class that renders a custom callout bubble, and has a `contentView` associated with it. In my concrete subclass of this, `ExampleCalloutView`, I add two text labels. Clearly you can do something more substantial than that, but I wanted to do enough here so that you could see that you have fine-grained control over the appearance (in this case, changing the background color and the `UIBezierPath` shape around the callout).
 
-I have also expanded this to detect taps on the callout, namely (a) adding a `hitTest` to the annotation view to included the callout, if present; and (b) added `hitTest` to callout base class to detect taps within the bubble. Then you can do things like adding a tap gesture recognizer to the callout. 
+I have also expanded this to detect taps on the callout, namely (a) adding a `hitTest` to the annotation view to included the callout, if present; and (b) added `hitTest` to callout base class to detect taps within the bubble. There is now a method, `didTouchUpInCallout`, that you can override if you want to take some action when the callout's `contentView` is tapped.
 
 This is not intended as an end-user library, but just a "simple" example of how one might create custom callouts. This is for illustrative purposes only.
 

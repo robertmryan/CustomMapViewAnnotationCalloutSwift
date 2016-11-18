@@ -29,8 +29,8 @@ class ExampleCalloutView: CalloutView {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: .callout)
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .callout)
         
         return label
     }()
@@ -38,10 +38,21 @@ class ExampleCalloutView: CalloutView {
     private var subtitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .caption1)
         
         return label
+    }()
+    
+    private var detailsButton: UIButton = {
+        let button = UIButton(type: .roundedRect)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Details", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .lightGray
+        button.layer.cornerRadius = 3
+        
+        return button
     }()
     
     init(annotation: MKShape) {
@@ -70,28 +81,40 @@ class ExampleCalloutView: CalloutView {
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
-        
-        let views = ["titleLabel": titleLabel, "subtitleLabel": subtitleLabel]
+        contentView.addSubview(detailsButton)
+        detailsButton.addTarget(self, action: #selector(didTapDetailsButton(_:)), for: .touchUpInside)
+
+        let views: [String: UIView] = [
+            "titleLabel": titleLabel,
+            "subtitleLabel": subtitleLabel,
+            "detailsButton": detailsButton
+        ]
         
         let vflStrings = [
-            "V:|[titleLabel][subtitleLabel]|",
+            "V:|[titleLabel][subtitleLabel][detailsButton]|",
             "H:|[titleLabel]|",
-            "H:|[subtitleLabel]|"
+            "H:|[subtitleLabel]|",
+            "H:|[detailsButton]|"
         ]
         
         for vfl in vflStrings {
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: vfl, options: [], metrics: nil, views: views))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: vfl, metrics: nil, views: views))
         }
-        
-        // if you don't want to detect tap on this callout view, comment out the following three lines
-        
-        isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        addGestureRecognizer(tap)
     }
     
-    func handleTap(_ gesture: UITapGestureRecognizer) {
-        print("tap")
+    // This is an example method, defined by `CalloutView`, which is called when you tap on the callout
+    // itself (but not one of its subviews that have user interaction enabled).
+    
+    override func didTouchUpInCallout(_ sender: Any) {
+        print("didTouchUpInCallout")
     }
     
+    // This is an example action method for tapping the button we added in this subclass.
+    // You'd probably either have a button like this method, or not have a button and use
+    // the above `didTouchUpCallout`, above, but not both. But I'm showing both, so you
+    // can pick whichever you prefer.
+    
+    func didTapDetailsButton(_ sender: UIButton) {
+        print("didTapDetailsButton")
+    }
 }

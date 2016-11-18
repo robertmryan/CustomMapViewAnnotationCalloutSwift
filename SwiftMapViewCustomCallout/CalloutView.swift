@@ -62,12 +62,12 @@ class CalloutView: UIView {
             contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.left + self.inset.right),
             contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.top + self.inset.bottom)
         ])
+        self.addBackgroundButton(to: contentView)
         return contentView
     }()
     
-    
     init() {
-        super.init(frame: CGRect.zero)
+        super.init(frame: .zero)
 
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -87,15 +87,10 @@ class CalloutView: UIView {
     // Override hitTest to detect taps within our callout bubble
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let doesContain = path?.contains(point) ?? false
-        if doesContain { return self }
-        return nil
+        let contentViewPoint = convert(point, to: contentView)
+        return contentView.hitTest(contentViewPoint, with: event)
     }
     
-    /// In order to do the above hitTest, we'll save the bezier path build in `updatePath`
-    
-    private var path: UIBezierPath?
-
     /// Update `UIBezierPath` for callout bubble
     ///
     /// The setting of the bubblePointerType dictates whether the pointer at the bottom of the
@@ -129,9 +124,6 @@ class CalloutView: UIView {
             point = CGPoint(x: point.x - inset.bottom, y: controlPoint.y)
             path.addQuadCurve(to: point, controlPoint: controlPoint)
         case .straight(let angle):
-            print(angle)
-            //0.392699081698724
-            //(52.0721286584462, 38.6666666666666)
             // lower right
             point = CGPoint(x: bounds.size.width / 2.0 + tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
             print(point)
@@ -194,12 +186,12 @@ class CalloutView: UIView {
         
         path.close()
         
-        self.path = path
-        
         bubbleLayer.path = path.cgPath
     }
 
     /// Add this `CalloutView` to an annotation view (i.e. show the callout on the map above the pin)
+    ///
+    /// - Parameter annotationView: The annotation to which this callout is being added.
     
     func add(to annotationView: MKAnnotationView) {
         annotationView.addSubview(self)
@@ -211,6 +203,47 @@ class CalloutView: UIView {
             centerXAnchor.constraint(equalTo: annotationView.centerXAnchor, constant: annotationView.calloutOffset.x)
         ])
     }
+}
+
+// MARK: - Background button related code
+
+extension CalloutView {
     
+    /// Add background button to callout
+    ///
+    /// This adds a button, the same size as the callout's `contentView`, to the `contentView`.
+    /// The purpose of this is two-fold: First, it provides an easy method, `didTouchUpInCallout`,
+    /// that you can `override` in order to detect taps on the callout. Second, by adding this
+    /// button (rather than just adding a tap gesture or the like), it ensures that when you tap
+    /// on the button, that it won't simultaneously register as a deselecting of the annotation,
+    /// thereby dismissing the callout. 
+    ///
+    /// This serves a similar functional purpose as `_MKSmallCalloutPassthroughButton` in the
+    /// default system callout.
+    ///
+    /// - Parameter view: The view to which we're adding this button.
+    
+    fileprivate func addBackgroundButton(to view: UIView) {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: view.topAnchor),
+            button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        button.addTarget(self, action: #selector(didTouchUpInCallout(_:)), for: .touchUpInside)
+    }
+    
+    /// Callout tapped.
+    ///
+    /// If you want to detect a tap on the callout, override this method. By default, this method does nothing.
+    ///
+    /// - Parameter sender: The actual hidden button that was tapped, not the callout, itself.
+    
+    func didTouchUpInCallout(_ sender: Any) {
+        // this is intentionally blank
+    }
 }
 
