@@ -21,11 +21,18 @@ import MapKit
 
 class CalloutView: UIView {
     
+    /// Shape of pointer at the bottom of the callout bubble
+    ///
+    /// - rounded: Circular, rounded pointer.
+    /// - straight: Straight lines for pointer. The angle is measured in radians, must be greater than 0 and less than `.pi` / 2. Using `.pi / 4` yields nice 45 degree angles.
+    
     enum BubblePointerType {
         case rounded
         case straight(angle: CGFloat)
     }
 
+    /// Shape of pointer at bottom of the callout bubble, pointing at annotation view.
+    
     private let bubblePointerType = BubblePointerType.rounded
     
     /// Insets for rounding of callout bubble's corners
@@ -36,12 +43,11 @@ class CalloutView: UIView {
     
     /// Shape layer for callout bubble
     
-    private lazy var bubbleLayer: CAShapeLayer = {
+    private let bubbleLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.strokeColor = UIColor.black.cgColor
         layer.fillColor = UIColor.blue.cgColor
         layer.lineWidth = 0.5
-        self.layer.insertSublayer(layer, at: 0)
         return layer
     }()
     
@@ -50,30 +56,40 @@ class CalloutView: UIView {
     /// This establishes the constraints between the `contentView` and the `CalloutView`,
     /// leaving enough padding for the chrome of the callout bubble.
     
-    lazy var contentView: UIView = {
+    let contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(contentView)
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: self.inset.top / 2.0),
-            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.inset.bottom - self.inset.right / 2.0),
-            contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.inset.left / 2.0),
-            contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -self.inset.right / 2.0),
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.left + self.inset.right),
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.top + self.inset.bottom)
-        ])
-        self.addBackgroundButton(to: contentView)
         return contentView
     }()
     
     init() {
         super.init(frame: .zero)
 
-        translatesAutoresizingMaskIntoConstraints = false
+        configureView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Should not call init(coder:)")
+    }
+    
+    /// Configure the view.
+    
+    private func configureView() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(contentView)
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: self.inset.top / 2.0),
+            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.inset.bottom - self.inset.right / 2.0),
+            contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.inset.left / 2.0),
+            contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -self.inset.right / 2.0),
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.left + self.inset.right),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: self.inset.top + self.inset.bottom)
+            ])
+        
+        addBackgroundButton(to: contentView)
+        
+        layer.insertSublayer(bubbleLayer, at: 0)
     }
     
     // if the view is resized, update the path for the callout bubble
@@ -126,7 +142,6 @@ class CalloutView: UIView {
         case .straight(let angle):
             // lower right
             point = CGPoint(x: bounds.size.width / 2.0 + tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
-            print(point)
             path.addLine(to: point)
             
             // right side of arrow
