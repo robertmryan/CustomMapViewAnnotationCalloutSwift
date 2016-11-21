@@ -79,13 +79,13 @@ class CalloutView: UIView {
         
         addSubview(contentView)
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: self.inset.top / 2.0),
-            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.inset.bottom - self.inset.right / 2.0),
-            contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.inset.left / 2.0),
-            contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -self.inset.right / 2.0),
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: self.inset.left + self.inset.right),
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: self.inset.top + self.inset.bottom)
-            ])
+            contentView.topAnchor.constraint(equalTo: topAnchor, constant: inset.top / 2.0),
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset.bottom - inset.right / 2.0),
+            contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: inset.left / 2.0),
+            contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -inset.right / 2.0),
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: inset.left + inset.right),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: inset.top + inset.bottom)
+        ])
         
         addBackgroundButton(to: contentView)
         
