@@ -61,12 +61,12 @@ extension ViewController: MKMapViewDelegate {
         var pin = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotationViewIdentifier) as? CustomAnnotationView
         if pin == nil {
             pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
-            pin?.buttonTapHandler = { [weak self] in
-                self?.selectedAnnotation = annotation as? MKPointAnnotation
-                self?.performSegue(withIdentifier: "DetailsSegue", sender: self)
-            }
         } else {
             pin?.annotation = annotation
+        }
+        pin?.buttonTapHandler = { [weak self] in
+            self?.selectedAnnotation = annotation as? MKPointAnnotation
+            self?.performSegue(withIdentifier: "DetailsSegue", sender: self)
         }
         return pin
     }
