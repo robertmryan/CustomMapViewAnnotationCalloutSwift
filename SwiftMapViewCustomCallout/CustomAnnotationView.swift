@@ -15,7 +15,8 @@ import MapKit
 class CustomAnnotationView: MKPinAnnotationView {
     
     weak var calloutView: ExampleCalloutView?
-    
+    var buttonTapHandler: (() -> ())?
+
     override var annotation: MKAnnotation? {
         willSet {
             calloutView?.removeFromSuperview()
@@ -49,7 +50,7 @@ class CustomAnnotationView: MKPinAnnotationView {
         if selected {
             self.calloutView?.removeFromSuperview()
             
-            let calloutView = ExampleCalloutView(annotation: annotation as! MKShape)
+            let calloutView = ExampleCalloutView(annotation: annotation as! MKShape, buttonTapHandler: buttonTapHandler)
             calloutView.add(to: self)
             self.calloutView = calloutView
             

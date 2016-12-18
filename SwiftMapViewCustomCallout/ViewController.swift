@@ -14,6 +14,7 @@ import MapKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+    var selectedAnnotation: MKPointAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,12 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailsViewController {
+            destination.annotation = selectedAnnotation
+        }
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -51,9 +58,13 @@ extension ViewController: MKMapViewDelegate {
         
         let customAnnotationViewIdentifier = "MyAnnotation"
         
-        var pin = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotationViewIdentifier)
+        var pin = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotationViewIdentifier) as? CustomAnnotationView
         if pin == nil {
             pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
+            pin?.buttonTapHandler = { [weak self] in
+                self?.selectedAnnotation = annotation as? MKPointAnnotation
+                self?.performSegue(withIdentifier: "DetailsSegue", sender: self)
+            }
         } else {
             pin?.annotation = annotation
         }

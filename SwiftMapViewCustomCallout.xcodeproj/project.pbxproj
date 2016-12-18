@@ -13,6 +13,7 @@
 		830D05911B2E992C00EF8033 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830D05901B2E992C00EF8033 /* Images.xcassets */; };
 		830D05941B2E992C00EF8033 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830D05921B2E992C00EF8033 /* LaunchScreen.xib */; };
 		830D05AA1B2E995700EF8033 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830D05A91B2E995700EF8033 /* MapKit.framework */; };
+		8354F7D51E0729CC0003A9F4 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8354F7D41E0729CC0003A9F4 /* DetailsViewController.swift */; };
 		837198361D5C0FC400687CBA /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198351D5C0FC400687CBA /* CalloutView.swift */; };
 		837198381D5C108300687CBA /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198371D5C108300687CBA /* CustomAnnotationView.swift */; };
 		8371983A1D5C43B000687CBA /* ExampleCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837198391D5C43B000687CBA /* ExampleCalloutView.swift */; };
@@ -28,6 +29,7 @@
 		830D05931B2E992C00EF8033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		830D05A91B2E995700EF8033 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		830D05B31B2E9E2C00EF8033 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8354F7D41E0729CC0003A9F4 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		837198351D5C0FC400687CBA /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
 		837198371D5C108300687CBA /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		837198391D5C43B000687CBA /* ExampleCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCalloutView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				830D05891B2E992700EF8033 /* AppDelegate.swift */,
 				830D058B1B2E992800EF8033 /* ViewController.swift */,
 				837198371D5C108300687CBA /* CustomAnnotationView.swift */,
+				8354F7D41E0729CC0003A9F4 /* DetailsViewController.swift */,
 				837198351D5C0FC400687CBA /* CalloutView.swift */,
 				837198391D5C43B000687CBA /* ExampleCalloutView.swift */,
 				830D058D1B2E992A00EF8033 /* Main.storyboard */,
@@ -171,6 +174,7 @@
 				837198381D5C108300687CBA /* CustomAnnotationView.swift in Sources */,
 				8371983A1D5C43B000687CBA /* ExampleCalloutView.swift in Sources */,
 				837198361D5C0FC400687CBA /* CalloutView.swift in Sources */,
+				8354F7D51E0729CC0003A9F4 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

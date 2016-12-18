@@ -25,6 +25,8 @@ import MapKit
 /// this callout view (if it's being shown at all).
 
 class ExampleCalloutView: CalloutView {
+    
+    var buttonTapHandler: (() -> ())?
 
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +57,9 @@ class ExampleCalloutView: CalloutView {
         return button
     }()
     
-    init(annotation: MKShape) {
+    init(annotation: MKShape, buttonTapHandler: (() -> ())?) {
+        self.buttonTapHandler = buttonTapHandler
+        
         super.init()
         
         configure()
@@ -115,6 +119,6 @@ class ExampleCalloutView: CalloutView {
     // can pick whichever you prefer.
     
     func didTapDetailsButton(_ sender: UIButton) {
-        print("didTapDetailsButton")
+        buttonTapHandler?()
     }
 }
