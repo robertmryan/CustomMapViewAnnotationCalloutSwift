@@ -78,14 +78,24 @@ class CalloutView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(contentView)
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: topAnchor, constant: inset.top / 2.0),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset.bottom - inset.right / 2.0),
-            contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: inset.left / 2.0),
-            contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -inset.right / 2.0),
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: inset.left + inset.right),
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: inset.top + inset.bottom)
-        ])
+        if #available(iOS 9.0, *) {
+            NSLayoutConstraint.activate([
+                contentView.topAnchor.constraint(equalTo: topAnchor, constant: inset.top / 2.0),
+                contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset.bottom - inset.right / 2.0),
+                contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: inset.left / 2.0),
+                contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -inset.right / 2.0),
+                contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: inset.left + inset.right),
+                contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: inset.top + inset.bottom)
+                ])
+        } else {
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: inset.top / 2.0))
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -inset.bottom - inset.right / 2.0))
+
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: inset.left / 2.0))
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: -inset.right / 2.0))
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: inset.left + inset.right))
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: inset.top + inset.bottom))
+        }
         
         addBackgroundButton(to: contentView)
         
@@ -213,10 +223,15 @@ class CalloutView: UIView {
         
         // constraints for this callout with respect to its superview
         
-        NSLayoutConstraint.activate([
-            bottomAnchor.constraint(equalTo: annotationView.topAnchor, constant: annotationView.calloutOffset.y),
-            centerXAnchor.constraint(equalTo: annotationView.centerXAnchor, constant: annotationView.calloutOffset.x)
-        ])
+        if #available(iOS 9.0, *) {
+            NSLayoutConstraint.activate([
+                bottomAnchor.constraint(equalTo: annotationView.topAnchor, constant: annotationView.calloutOffset.y),
+                centerXAnchor.constraint(equalTo: annotationView.centerXAnchor, constant: annotationView.calloutOffset.x)
+            ])
+        } else {
+            superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0))
+            superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: superview, attribute: .centerX, multiplier: 1, constant: 0))
+        }
     }
 }
 
@@ -242,12 +257,19 @@ extension CalloutView {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: view.topAnchor),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        if #available(iOS 9.0, *) {
+            NSLayoutConstraint.activate([
+                button.topAnchor.constraint(equalTo: view.topAnchor),
+                button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                button.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
+        } else {
+            view.addConstraint(NSLayoutConstraint(item: button, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: button, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: button, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: button, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0))
+        }
         button.addTarget(self, action: #selector(didTouchUpInCallout(_:)), for: .touchUpInside)
     }
     

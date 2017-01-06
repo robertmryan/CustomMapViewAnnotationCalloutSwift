@@ -30,7 +30,11 @@ class ExampleCalloutView: CalloutView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .callout)
+        if #available(iOS 9.0, *) {
+            label.font = .preferredFont(forTextStyle: .callout)
+        } else {
+            label.font = .preferredFont(forTextStyle: .caption1)
+        }
         
         return label
     }()
