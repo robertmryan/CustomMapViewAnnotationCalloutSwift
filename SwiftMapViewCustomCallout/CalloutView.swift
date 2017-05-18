@@ -21,6 +21,10 @@ import MapKit
 
 class CalloutView: UIView {
     
+    /// The annotation for which this callout has been created.
+    
+    weak var annotation: MKAnnotation?
+
     /// Shape of pointer at the bottom of the callout bubble
     ///
     /// - rounded: Circular, rounded pointer.
@@ -62,14 +66,16 @@ class CalloutView: UIView {
         return contentView
     }()
     
-    init() {
+    init(annotation: MKAnnotation) {
+        self.annotation = annotation
+
         super.init(frame: .zero)
 
         configureView()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Should not call init(coder:)")
+        fatalError("init(coder:) has not been implemented")
     }
     
     /// Configure the view.

@@ -60,5 +60,17 @@ extension ViewController: MKMapViewDelegate {
         return pin
     }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("mapView(_:annotationView:calloutAccessoryControlTapped)")
+    }
+}
+
+// If you want view controller to be able to do something when you tap button in callout, conform to this protocol
+// and implement this method.
+
+extension ViewController: ExampleCalloutViewDelegate {
+    func mapView(_ mapView: MKMapView, didTapDetailsButton button: UIButton, for annotation: MKAnnotation) {
+        print("mapView(_:didTapDetailsButton:for:)")
+    }
 }
 

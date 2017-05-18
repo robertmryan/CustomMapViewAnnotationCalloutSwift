@@ -9,6 +9,10 @@
 import UIKit
 import MapKit
 
+protocol ExampleCalloutViewDelegate {
+    func mapView(_ mapView: MKMapView, didTapDetailsButton button: UIButton, for annotation: MKAnnotation)
+}
+
 /// Callout that shows title and subtitle
 ///
 /// This is concrete subclass of `CalloutView` that has two labels. Note, to 
@@ -55,8 +59,8 @@ class ExampleCalloutView: CalloutView {
         return button
     }()
     
-    init(annotation: MKShape) {
-        super.init()
+    override init(annotation: MKAnnotation) {
+        super.init(annotation: annotation)
         
         configure()
         
@@ -69,9 +73,9 @@ class ExampleCalloutView: CalloutView {
     
     /// Update callout contents
     
-    private func updateContents(for annotation: MKShape) {
+    private func updateContents(for annotation: MKAnnotation) {
         titleLabel.text = annotation.title ?? "Unknown"
-        subtitleLabel.text = annotation.subtitle
+        subtitleLabel.text = annotation.subtitle ?? nil
     }
     
     /// Add constraints for subviews of `contentView`
@@ -109,12 +113,36 @@ class ExampleCalloutView: CalloutView {
         print("didTouchUpInCallout")
     }
     
-    // This is an example action method for tapping the button we added in this subclass.
-    // You'd probably either have a button like this method, or not have a button and use
-    // the above `didTouchUpCallout`, above, but not both. But I'm showing both, so you
-    // can pick whichever you prefer.
+    /// Callout detail button was tapped
+    ///
+    /// This is an example action method for tapping the button we added in this subclass.
+    /// You'd probably either have a button like this method, or not have a button and use
+    /// the above `didTouchUpCallout`, above, but not both. But I'm showing both, so you
+    /// can pick whichever you prefer.
+    ///
+    /// If you want the view controller to do something when you tap on the button, you would:
+    /// 
+    ///  - Want to declare a protocol to which your map view delegate will conform; and
+    ///  - Actually see if map view's delegate conforms to this protocol and, if so, call the method.
+    ///
+    /// - Parameter sender: The button we tapped on in the callout.
     
     func didTapDetailsButton(_ sender: UIButton) {
-        print("didTapDetailsButton")
+        if let mapView = mapView, let delegate = mapView.delegate as? ExampleCalloutViewDelegate {
+            delegate.mapView(mapView, didTapDetailsButton: sender, for: annotation!)
+        }
+    }
+
+    /// Map view
+    ///
+    /// Navigate up view hierarchy until we find `MKMapView`.
+    
+    var mapView: MKMapView? {
+        var view = superview
+        while view != nil {
+            if let mapView = view as? MKMapView { return mapView }
+            view = view?.superview
+        }
+        return nil
     }
 }
