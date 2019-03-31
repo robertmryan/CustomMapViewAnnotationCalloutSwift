@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-protocol ExampleCalloutViewDelegate {
+protocol ExampleCalloutViewDelegate: class {
     func mapView(_ mapView: MKMapView, didTapDetailsButton button: UIButton, for annotation: MKAnnotation)
 }
 
@@ -127,7 +127,7 @@ class ExampleCalloutView: CalloutView {
     ///
     /// - Parameter sender: The button we tapped on in the callout.
     
-    func didTapDetailsButton(_ sender: UIButton) {
+    @objc func didTapDetailsButton(_ sender: UIButton) {
         if let mapView = mapView, let delegate = mapView.delegate as? ExampleCalloutViewDelegate {
             delegate.mapView(mapView, didTapDetailsButton: sender, for: annotation!)
         }

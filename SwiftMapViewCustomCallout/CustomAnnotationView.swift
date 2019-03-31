@@ -65,7 +65,7 @@ class CustomAnnotationView: MKPinAnnotationView {
             if animated {
                 UIView.animate(withDuration: animationDuration, animations: {
                     calloutView.alpha = 0
-                }, completion: { finished in
+                }, completion: { _ in
                     calloutView.removeFromSuperview()
                 })
             } else {
@@ -99,4 +99,3 @@ class CustomAnnotationView: MKPinAnnotationView {
     }
     
 }
-

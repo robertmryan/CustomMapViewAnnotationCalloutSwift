@@ -106,7 +106,7 @@ class CalloutView: UIView {
         updatePath()
     }
     
-    // Override hitTest to detect taps within our callout bubble
+    // Overri@objc de hitTest to detect taps within our callout bubble
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let contentViewPoint = convert(point, to: contentView)
@@ -120,12 +120,9 @@ class CalloutView: UIView {
     
     private func updatePath() {
         let path = UIBezierPath()
-        
-        var point: CGPoint
-        
+        var point: CGPoint = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
         var controlPoint: CGPoint
         
-        point = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
         path.move(to: point)
 
         switch bubblePointerType {
@@ -145,6 +142,7 @@ class CalloutView: UIView {
             controlPoint = CGPoint(x: point.x, y: bounds.size.height - inset.bottom)
             point = CGPoint(x: point.x - inset.bottom, y: controlPoint.y)
             path.addQuadCurve(to: point, controlPoint: controlPoint)
+            
         case .straight(let angle):
             // lower right
             point = CGPoint(x: bounds.size.width / 2.0 + tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
@@ -201,7 +199,7 @@ class CalloutView: UIView {
         
         // lower right corner
         
-        controlPoint = CGPoint(x:bounds.size.width, y: bounds.size.height - inset.bottom)
+        controlPoint = CGPoint(x: bounds.size.width, y: bounds.size.height - inset.bottom)
         point = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
         path.addQuadCurve(to: point, controlPoint: controlPoint)
         
@@ -263,8 +261,7 @@ extension CalloutView {
     ///
     /// - Parameter sender: The actual hidden button that was tapped, not the callout, itself.
     
-    func didTouchUpInCallout(_ sender: Any) {
+    @objc func didTouchUpInCallout(_ sender: Any) {
         // this is intentionally blank
     }
 }
-
