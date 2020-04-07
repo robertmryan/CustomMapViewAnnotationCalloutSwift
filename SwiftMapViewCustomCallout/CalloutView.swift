@@ -106,7 +106,7 @@ class CalloutView: UIView {
         updatePath()
     }
     
-    // Overri@objc de hitTest to detect taps within our callout bubble
+    // Override hitTest to detect taps within our callout bubble
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let contentViewPoint = convert(point, to: contentView)
@@ -120,7 +120,7 @@ class CalloutView: UIView {
     
     private func updatePath() {
         let path = UIBezierPath()
-        var point: CGPoint = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
+        var point: CGPoint = CGPoint(x: bounds.width - inset.right, y: bounds.height - inset.bottom)
         var controlPoint: CGPoint
         
         path.move(to: point)
@@ -128,34 +128,34 @@ class CalloutView: UIView {
         switch bubblePointerType {
         case .rounded:
             // lower right
-            point = CGPoint(x: bounds.size.width / 2.0 + inset.bottom, y: bounds.size.height - inset.bottom)
+            point = CGPoint(x: bounds.width / 2.0 + inset.bottom, y: bounds.height - inset.bottom)
             path.addLine(to: point)
             
             // right side of arrow
             
-            controlPoint = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height - inset.bottom)
-            point = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height)
+            controlPoint = CGPoint(x: bounds.width / 2.0, y: bounds.height - inset.bottom)
+            point = CGPoint(x: bounds.width / 2.0, y: bounds.height)
             path.addQuadCurve(to: point, controlPoint: controlPoint)
             
             // left of pointer
 
-            controlPoint = CGPoint(x: point.x, y: bounds.size.height - inset.bottom)
+            controlPoint = CGPoint(x: point.x, y: bounds.height - inset.bottom)
             point = CGPoint(x: point.x - inset.bottom, y: controlPoint.y)
             path.addQuadCurve(to: point, controlPoint: controlPoint)
             
         case .straight(let angle):
             // lower right
-            point = CGPoint(x: bounds.size.width / 2.0 + tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
+            point = CGPoint(x: bounds.width / 2.0 + tan(angle) * inset.bottom, y: bounds.height - inset.bottom)
             path.addLine(to: point)
             
             // right side of arrow
             
-            point = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height)
+            point = CGPoint(x: bounds.width / 2.0, y: bounds.height)
             path.addLine(to: point)
             
             // left of pointer
             
-            point = CGPoint(x: bounds.size.width / 2.0 - tan(angle) * inset.bottom, y: bounds.size.height - inset.bottom)
+            point = CGPoint(x: bounds.width / 2.0 - tan(angle) * inset.bottom, y: bounds.height - inset.bottom)
             path.addLine(to: point)
         }
         
@@ -166,7 +166,7 @@ class CalloutView: UIView {
         
         // lower left corner
         
-        controlPoint = CGPoint(x: 0, y: bounds.size.height - inset.bottom)
+        controlPoint = CGPoint(x: 0, y: bounds.height - inset.bottom)
         point = CGPoint(x: 0, y: controlPoint.y - inset.left)
         path.addQuadCurve(to: point, controlPoint: controlPoint)
         
@@ -183,24 +183,24 @@ class CalloutView: UIView {
         
         // top
         
-        point = CGPoint(x: bounds.size.width - inset.left, y: 0)
+        point = CGPoint(x: bounds.width - inset.left, y: 0)
         path.addLine(to: point)
         
         // top right corner
         
-        controlPoint = CGPoint(x: bounds.size.width, y: 0)
-        point = CGPoint(x: bounds.size.width, y: inset.top)
+        controlPoint = CGPoint(x: bounds.width, y: 0)
+        point = CGPoint(x: bounds.width, y: inset.top)
         path.addQuadCurve(to: point, controlPoint: controlPoint)
         
         // right
         
-        point = CGPoint(x: bounds.size.width, y: bounds.size.height - inset.bottom - inset.right)
+        point = CGPoint(x: bounds.width, y: bounds.height - inset.bottom - inset.right)
         path.addLine(to: point)
         
         // lower right corner
         
-        controlPoint = CGPoint(x: bounds.size.width, y: bounds.size.height - inset.bottom)
-        point = CGPoint(x: bounds.size.width - inset.right, y: bounds.size.height - inset.bottom)
+        controlPoint = CGPoint(x: bounds.width, y: bounds.height - inset.bottom)
+        point = CGPoint(x: bounds.width - inset.right, y: bounds.height - inset.bottom)
         path.addQuadCurve(to: point, controlPoint: controlPoint)
         
         path.close()
