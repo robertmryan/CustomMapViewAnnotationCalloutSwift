@@ -1,4 +1,4 @@
-## Custom MapView Annotation Callouts in Swift 
+## Custom MapView Annotation Callouts in Swift
 
 This is an demonstration of a custom map view annotation callouts in Swift.
 
@@ -16,11 +16,11 @@ This is not intended as an end-user library, but just a "simple" example of how 
 
 See http://stackoverflow.com/a/30824051/1271826.
 
-Developed in Swift on Xcode 8.1 for iOS 10 using Swift 3, but updated for Xcode 10.2 and Swift 5. See the `swift2` branch for Swift 2 on iOS 9. But, the basic ideas are equally applicable for different versions of Swift and Objective-C. 
+Developed in Swift on Xcode 8.1 for iOS 10 using Swift 3, but updated for Xcode 11.5 and Swift 5.2. See the `swift2` branch for Swift 2 on iOS 9. But, the basic ideas are equally applicable for different versions of Swift and Objective-C.
 
 ## License
 
-Copyright &copy; 2015-2016 Robert Ryan. All rights reserved.
+Copyright &copy; 2015-2020 Robert Ryan. All rights reserved.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 

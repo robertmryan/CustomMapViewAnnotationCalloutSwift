@@ -1,0 +1,31 @@
+disabled_rules:
+ - force_cast
+ - discarded_notification_center_observer
+ - type_body_length
+ - weak_computed_property
+
+opt_in_rules:
+ - empty_string
+  
+file_length:
+  warning: 500
+  error: 1200
+
+line_length: 
+  warning: 300
+  error: 400
+
+included:
+
+excluded:
+  - Carthage
+  - Pods
+  
+identifier_name:
+  excluded:
+    - id
+    - i
+    - j
+    - k
+    - url
+    - db

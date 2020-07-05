@@ -12,20 +12,20 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController {
-    
+
     @IBOutlet weak var mapView: MKMapView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
+
     @IBAction func didTapButton(_ sender: UIButton) {
         addAnnotation(for: mapView.centerCoordinate)
     }
-    
+
     let geocoder = CLGeocoder()
-    
+
     func addAnnotation(for coordinate: CLLocationCoordinate2D) {
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         geocoder.reverseGeocodeLocation(location) { placemarks, _ in
@@ -45,12 +45,16 @@ class ViewController: UIViewController {
 extension ViewController: MKMapViewDelegate {
 
     /// show custom annotation view
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation { return nil }
-        
+
+        if #available(iOS 11.0, *) {
+            if annotation is MKClusterAnnotation { return nil }
+        }
+
         let customAnnotationViewIdentifier = "MyAnnotation"
-        
+
         var pin = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotationViewIdentifier)
         if pin == nil {
             pin = CustomAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
@@ -59,7 +63,7 @@ extension ViewController: MKMapViewDelegate {
         }
         return pin
     }
-    
+
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("mapView(_:annotationView:calloutAccessoryControlTapped)")
     }
